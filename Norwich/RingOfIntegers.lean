@@ -275,7 +275,6 @@ theorem discr_d_2_or_3 (hd : d ≡ 2 [ZMOD 4] ∨ d ≡ 3 [ZMOD 4]) : discr K = 
     discr K = Algebra.discr ℤ b := (NumberField.discr_eq_discr K b).symm
     _ = Algebra.discr ℤ (QuadraticAlgebra.basis d 0) := by
       convert (Algebra.discr_eq_discr_of_algEquiv (QuadraticAlgebra.basis d 0) e).symm using 1
-      change Algebra.discr ℤ (fun i => e ((QuadraticAlgebra.basis d 0) i)) = _
       rfl
     _ = 4 * d := by simpa using quadratic_discr d 0
 
@@ -288,12 +287,9 @@ theorem discr_d_1 [Fact (d ≡ 1 [ZMOD 4])] : discr K = d := by
     _ = Algebra.discr ℤ (QuadraticAlgebra.basis ((d - 1) / 4) 1) := by
       convert (Algebra.discr_eq_discr_of_algEquiv (QuadraticAlgebra.basis ((d - 1) / 4) 1) f).symm
         using 1
-      change Algebra.discr ℤ (fun i => f ((QuadraticAlgebra.basis ((d - 1) / 4) 1) i)) = _
       rfl
     _ = 1 ^ 2 + 4 * ((d - 1) / 4) := quadratic_discr _ _
-    _ = d := by
-      rw [e_spec]
-      ring
+    _ = d := by grind [e_spec]
 
 end discriminant
 
