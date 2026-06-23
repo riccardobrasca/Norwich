@@ -5,6 +5,7 @@ import Mathlib.NumberTheory.NumberField.Basic
 import Mathlib.Tactic.ModCases
 import Mathlib.RingTheory.Norm.Transitivity
 import Mathlib.Data.Nat.Prime.Int
+import Mathlib.NumberTheory.NumberField.Discriminant.Defs
 import Mathlib.Tactic.Qify
 
 namespace QuadraticInteger
@@ -17,13 +18,19 @@ local notation3 "K" => QuadraticAlgebra ℚ d 0
 
 local notation3 "R" => QuadraticAlgebra ℤ d 0
 
-variable [sf : Fact (Squarefree d)] [alt : d.natAbs.AtLeastTwo]
+variable [sf : Fact (Squarefree d)] [hd1 : Fact (d ≠ 1)]
 
 instance field : Fact (∀ (r : ℚ), r ^ 2 ≠ d + 0 * r) := by
   refine ⟨fun r h ↦ ?_⟩
   rsuffices ⟨s, hs⟩ : IsSquare d
-  · grind [isUnit_mul_self <| sf.1 s (dvd_of_eq hs.symm), alt.1]
+  · have hu : IsUnit s := sf.1 s (dvd_of_eq hs.symm)
+    have hd : d = 1 := by
+      have h0 : 0 ≤ d := by rw [hs]; exact mul_self_nonneg s
+      rcases Int.isUnit_iff.1 (hs ▸ hu.mul hu) with h1 | h1 <;> omega
+    exact hd1.1 hd
   exact Rat.isSquare_intCast_iff.1 ⟨r, by grind⟩
+
+instance : NumberField K where
 
 section trace_and_norm
 
@@ -180,7 +187,7 @@ variable [h : Fact (d ≡ 1 [ZMOD 4])]
 
 local notation3 "e" => (d - 1) / 4
 
-omit sf alt in
+omit sf hd1 in
 lemma e_spec : 4 * e = d - 1 :=
   mul_ediv_cancel_of_emod_eq_zero <| emod_eq_emod_iff_emod_sub_eq_zero.mp h.1
 
@@ -241,5 +248,53 @@ theorem d_1 : IsIntegralClosure S ℤ K := by
 
 
 end d_1
+
+section discriminant
+
+lemma quadratic_trace (a b : ℤ) (x : QuadraticAlgebra ℤ a b) :
+    Algebra.trace ℤ (QuadraticAlgebra ℤ a b) x = 2 * x.re + b * x.im := by
+  obtain ⟨x, y⟩ := x
+  rw [Algebra.trace_eq_matrix_trace (QuadraticAlgebra.basis a b), Matrix.trace_fin_two]
+  simp only [Algebra.leftMulMatrix_eq_repr_mul, QuadraticAlgebra.basis_repr_apply]
+  simp [QuadraticAlgebra.basis, QuadraticAlgebra.linearEquivTuple]
+  ring
+
+lemma quadratic_discr (a b : ℤ) :
+    Algebra.discr ℤ (QuadraticAlgebra.basis a b) = b ^ 2 + 4 * a := by
+  rw [Algebra.discr_def, Matrix.det_fin_two]
+  simp only [Algebra.traceMatrix_apply, Algebra.traceForm_apply]
+  rw [quadratic_trace, quadratic_trace, quadratic_trace, quadratic_trace]
+  simp [QuadraticAlgebra.basis, QuadraticAlgebra.linearEquivTuple]
+  ring
+
+theorem discr_d_2_or_3 (hd : d ≡ 2 [ZMOD 4] ∨ d ≡ 3 [ZMOD 4]) : discr K = 4 * d := by
+  letI : IsIntegralClosure R ℤ K := d_2_or_3 hd
+  let e := IsIntegralClosure.equiv ℤ R K (𝓞 K)
+  let b := (QuadraticAlgebra.basis d 0).map e.toLinearEquiv
+  calc
+    discr K = Algebra.discr ℤ b := (NumberField.discr_eq_discr K b).symm
+    _ = Algebra.discr ℤ (QuadraticAlgebra.basis d 0) := by
+      convert (Algebra.discr_eq_discr_of_algEquiv (QuadraticAlgebra.basis d 0) e).symm using 1
+      change Algebra.discr ℤ (fun i => e ((QuadraticAlgebra.basis d 0) i)) = _
+      rfl
+    _ = 4 * d := by simpa using quadratic_discr d 0
+
+theorem discr_d_1 [Fact (d ≡ 1 [ZMOD 4])] : discr K = d := by
+  letI : IsIntegralClosure (QuadraticAlgebra ℤ ((d - 1) / 4) 1) ℤ K := d_1
+  let f := IsIntegralClosure.equiv ℤ (QuadraticAlgebra ℤ ((d - 1) / 4) 1) K (𝓞 K)
+  let b := (QuadraticAlgebra.basis ((d - 1) / 4) 1).map f.toLinearEquiv
+  calc
+    discr K = Algebra.discr ℤ b := (NumberField.discr_eq_discr K b).symm
+    _ = Algebra.discr ℤ (QuadraticAlgebra.basis ((d - 1) / 4) 1) := by
+      convert (Algebra.discr_eq_discr_of_algEquiv (QuadraticAlgebra.basis ((d - 1) / 4) 1) f).symm
+        using 1
+      change Algebra.discr ℤ (fun i => f ((QuadraticAlgebra.basis ((d - 1) / 4) 1) i)) = _
+      rfl
+    _ = 1 ^ 2 + 4 * ((d - 1) / 4) := quadratic_discr _ _
+    _ = d := by
+      rw [e_spec]
+      ring
+
+end discriminant
 
 end QuadraticInteger
