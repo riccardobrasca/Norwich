@@ -12,7 +12,7 @@
         "lakefile.toml": true,
         "lean-toolchain": true,
         "LICENSE": true,
-        ".devcontainer": true,
+        ".gitpod.yml": true,
     },
     "editor.minimap.enabled": false,
     "editor.acceptSuggestionOnEnter": "off",

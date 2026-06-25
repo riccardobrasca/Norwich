@@ -98,22 +98,21 @@ To get it, in the left bar of VSCode, click on the `Extensions` button (4-th or 
 
 ## Alternative ways to use Lean
 
-You can use Codespaces if you have trouble installing Lean locally. These work fine, but not as well as a locally installed copy of Lean.
+You can use Gitpod if you have trouble installing Lean locally. These work fine, but not as well as a locally installed copy of Lean.
 
-### Using Codespaces
+### Using Gitpod
 
-You can temporarily play with Lean using Github Codespaces. This requires a Github account, and you can only use it for a limited amount of time each month. If you are signed in to Github, click here:
+You can temporarily play with Lean using Gitpod. This requires a Github account, and you can only use it for a limited amount of time each month. If you are signed in to Github, click here:
 
-<a href='https://codespaces.new/riccardobrasca/Norwich' target="_blank" rel="noreferrer noopener"><img src='https://github.com/codespaces/badge.svg' alt='Open in GitHub Codespaces' style='max-width: 100%;'></a>
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
 
-* Make sure the Machine type is `4-core`, and then press `Create codespace`
 * After 1-2 minutes you see a VSCode window in your browser. However, it is still busily downloading mathlib in the background, so give it another few minutes (5 to be safe) and then open a `.lean` file to start.
 
-To restart a previous codespace, go to [https://github.com/codespaces/](https://github.com/codespaces/).
+To restart a previous workspace, go to [https://gitpod.io/workspaces/](https://gitpod.io/workspaces/).
 
 ## Troubleshooting
 
 If you get the error `unknown package 'Mathlib'` and a red squiggle under `import Mathlib.Tactic` then you probably didn't open the right folder (what you see might be slightly different from the screenshot below depending on the extensions you have installed, but the red squiggle shouldn't be there).
 ![6](img/6.png)
 * Make sure to select `File/Open Folder` (*not* `File/Open File`) and to select the root folder called `Norwich` (or the name you chose during the installation). Note that this folder contains another folder also called `Norwich`: you have to select the first one (*not* the one `Norwich/Norwich`).
-* If the error persists you can use Codespaces as described above and ask for help.
+* If the error persists you can use Gitpod as described above and ask for help.
