@@ -1,4 +1,4 @@
-import Norwich.Instances
+import Norwich.Preliminaries.Instances
 import Mathlib.Algebra.Squarefree.Basic
 import Mathlib.Data.Int.ModEq
 import Mathlib.NumberTheory.NumberField.Basic

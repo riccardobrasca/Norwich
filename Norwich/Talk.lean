@@ -146,7 +146,7 @@ example : 𝓞 (QuadraticAlgebra ℚ (-1) 0) ≃ₐ[ℤ] QuadraticAlgebra ℤ (-
   sorry
 
 /-- A more idiomatic way of saying the same is the following, but it needs
-`import Norwich.Instances`. An interesting exercise is to remove it and fill in the missing instance
+`import Norwich.Preliminaries.Instances`. An interesting exercise is to remove it and fill in the missing instance
 by hand: you will discover that the instance
 `instance (a : ℤ) : Algebra (QuadraticAlgebra ℤ a 0) (QuadraticAlgebra S a 0) :=`
 is not enough here. Can you spot why?
