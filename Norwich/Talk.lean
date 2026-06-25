@@ -3,7 +3,7 @@ If your computer is fast enough, always start with `import Mathlib`. You can cle
 -/
 
 import Mathlib
-import Norwich.Instances
+import Norwich.Preliminaries.Instances
 
 /-!
 
