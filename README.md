@@ -14,8 +14,6 @@ Note: to get this repository, you will need to download Lean's mathematical libr
 
 * Open Visual Studio Code.
 
-* If no file is open, create a new empty text file (`File ... > New Text File`).
-
 * In the top-right (or top-middle) of the screen there is a Lean menu marked by `∀`.
   In it, choose `Open Project... > Project: Download Project`. If you don't see the `∀`, the Lean extension is not installed, go back to the previous step or ask for help.
 
@@ -34,7 +32,6 @@ Note: to get this repository, you will need to download Lean's mathematical libr
 * Open the file `Norwich/Test.lean` using the explorer button in the top-left.
   ![3](img/3.png)
 * VSCode will pause for a bit (10-40 seconds, depending on your computer), showing a `Starting Lean language client` pop-up.
-  ![4](img/4.png)
 * When the pop-up `Imports of 'Test.lean' are out of date and must be rebuilt.` appears, click on `Restart File` and wait a couple of seconds (this part should be very quick).
   ![5](img/5.png)
 * Everything should be ready now. If you see a blue squiggle under `#eval`, Lean is running correctly.
@@ -60,7 +57,7 @@ Note: to get this repository, you will need to download Lean's mathematical libr
 
 * Run
   ```
-  lake build +Norwich.Test
+  lake build
   ```
   This should take less than 1 minute. If you get more than a few lines of output, then you're rebuilding Mathlib from scratch, which means that one of the steps above (`lake exe cache get!`) went wrong. You can quit the execution (by typing `Ctrl c`) and ask for help.
 
