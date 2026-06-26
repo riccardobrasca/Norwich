@@ -1,6 +1,7 @@
 {
     "files.exclude": {
         "**/.git": true,
+        "**/.claude": true,
         "**/.DS_Store": true,
         "**/*.olean": true,
         "**/.vscode": true,
