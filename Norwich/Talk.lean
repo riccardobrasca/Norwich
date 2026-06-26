@@ -31,7 +31,7 @@ We go through various examples taken from Marcus' book *Number Fields* and see h
 Lean, using the library and then we will move to elliptic curves and modular forms.
 
 Most (but not all!) of the `sorry` are provable. It's a good idea to try to do so to familiarize
-yourself with the library (the one in line 202 is probably quite hard, but it's fun).
+yourself with the library (the one in line 223 is probably quite hard, but it's fun).
 
 -/
 
@@ -231,5 +231,3 @@ with the curve's L-function at every prime. -/
 example : ∃! f : CuspForm (Gamma0 11) 2, (qExpansion 1 f).coeff 1 = 1 ∧
     ∀ (p : Primes), (qExpansion 1 f).coeff p = E.LFunction p := by
   sorry
-
-#min_imports

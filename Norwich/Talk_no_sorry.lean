@@ -247,5 +247,3 @@ with the curve's L-function at every prime. -/
 example : ∃! f : CuspForm (Gamma0 11) 2, (qExpansion 1 f).coeff 1 = 1 ∧
     ∀ (p : Primes), (qExpansion 1 f).coeff p = E.LFunction p := by
   sorry
-
-#min_imports
