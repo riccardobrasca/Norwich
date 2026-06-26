@@ -4,13 +4,21 @@ This is the repository for the talk *Algebraic Number Theory in Lean* given in N
 
 * All the files needed during the talk are in the subfolder `Norwich`. See below for the instructions to install everything you need.
 
+## Repository contents
+
+The main file for the talk is `Norwich/Talk.lean`. This is the file to open and work through during
+the talk.
+
+The file `Norwich/Solutions.lean` contains most of the answers to the exercises and examples from
+`Norwich/Talk.lean`.
+
 ## Installation
 
 Note: to get this repository, you will need to download Lean's mathematical library, which takes about 5 GB of storage space.
 
-* You have to install Lean, and two supporting programs: Git and VSCode (including the Lean4 extension). Follow these [instructions](https://lean-lang.org/install/) to do this. You do not have to follow the last step (creating Lean projects). Instead, use either VSCode or a terminal to get this repository.
+* You have to install Lean, and two supporting programs: Git and VS Code (including the Lean4 extension). Follow these [instructions](https://lean-lang.org/install/) to do this. You do not have to follow the last step (creating Lean projects). Instead, use either VS Code or a terminal to get this repository.
 
-### Get the Repository using VSCode
+### Get the Repository using VS Code
 
 * Open Visual Studio Code.
 
@@ -22,16 +30,16 @@ Note: to get this repository, you will need to download Lean's mathematical libr
   ```
   https://github.com/riccardobrasca/Norwich.git
   ```
-  and press enter (note that VSCode suggests you to download mathlib, that is *not* this repository).
+  and press enter (note that VS Code suggests you to download mathlib, that is *not* this repository).
 
   ![2](img/2.png)
 * Choose a name for the folder where you want to have this repository (for example `Norwich`).
   This downloads the project, including mathlib, and will take a bit of time.
 * Press `Open Project Folder` when asked if you want to open the folder.
-* If VSCode asks `Do you trust the authors of the files in this folder?` click `Yes, I trust the authors`.
+* If VS Code asks `Do you trust the authors of the files in this folder?` click `Yes, I trust the authors`.
 * Open the file `Norwich/Test.lean` using the explorer button in the top-left.
   ![3](img/3.png)
-* VSCode will pause for a bit (10-40 seconds, depending on your computer), showing a `Starting Lean language client` pop-up.
+* VS Code will pause for a bit (10-40 seconds, depending on your computer), showing a `Starting Lean language client` pop-up.
 * When the pop-up `Imports of 'Test.lean' are out of date and must be rebuilt.` appears, click on `Restart File` and wait a couple of seconds (this part should be very quick).
   ![5](img/5.png)
 * Everything should be ready now. If you see a blue squiggle under `#eval`, Lean is running correctly.
@@ -65,7 +73,7 @@ Note: to get this repository, you will need to download Lean's mathematical libr
   ```
   code .
   ```
-   MacOS users need to take a one-off
+   macOS users need to take a one-off
   [extra step](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line)
    to be able to launch VS Code from the command line.
 
@@ -73,7 +81,7 @@ Note: to get this repository, you will need to download Lean's mathematical libr
   click "Open folder" (just "Open" on a Mac), and choose the folder
   `Norwich` (*not* one of its subfolders).
 
-* If VSCode asks `Do you trust the authors of the files in this folder?` click `Yes, I trust the authors`
+* If VS Code asks `Do you trust the authors of the files in this folder?` click `Yes, I trust the authors`
 
 * Test that everything is working by opening `Norwich/Test.lean`.
   It is normal if it takes 10-40 seconds for Lean to start up.
@@ -91,7 +99,7 @@ This gives you the new exercises.
 ### Error Lens extension
 
 Optional: some users find it useful to download the `Error Lens` extension. This displays Lean messages directly in your source file.
-To get it, in the left bar of VSCode, click on the `Extensions` button (4-th or 5-th button), and search and install the extension `Error Lens`. It will start automatically.
+To get it, in the left bar of VS Code, click on the `Extensions` button (4th or 5th button), and search and install the extension `Error Lens`. It will start automatically.
 
 ## Alternative ways to use Lean
 
@@ -99,12 +107,12 @@ You can use Codespaces if you have trouble installing Lean locally. These work f
 
 ### Using Codespaces
 
-You can temporarily play with Lean using Github Codespaces. This requires a Github account, and you can only use it for a limited amount of time each month. If you are signed in to Github, click here:
+You can temporarily play with Lean using GitHub Codespaces. This requires a GitHub account, and you can only use it for a limited amount of time each month. If you are signed in to GitHub, click here:
 
 <a href='https://codespaces.new/riccardobrasca/Norwich' target="_blank" rel="noreferrer noopener"><img src='https://github.com/codespaces/badge.svg' alt='Open in GitHub Codespaces' style='max-width: 100%;'></a>
 
 * Make sure the Machine type is `4-core`, and then press `Create codespace`
-* After a couple of minuts minutes you see a VSCode window in your browser. However, it is still busily downloading mathlib in the background, so give it another few minutes (5-10 to be safe) and then open a `.lean` file to start.
+* After a couple of minutes you see a VS Code window in your browser. However, it is still busily downloading mathlib in the background, so give it another few minutes (5-10 to be safe) and then open a `.lean` file to start.
 
 To restart a previous codespace, go to [https://github.com/codespaces/](https://github.com/codespaces/).
 

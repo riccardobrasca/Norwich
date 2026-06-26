@@ -14,6 +14,8 @@ import Mathlib.NumberTheory.ModularForms.QExpansion
 import Norwich.Preliminaries.LFunctionGoodReduction
 import Norwich.Preliminaries.RingOfIntegers
 
+-- If your computer is fast enough it may be a good idea to start with `import Mathlib`
+
 /-!
 
 # Algebraic Number Theory in Lean
@@ -29,7 +31,7 @@ We go through various examples taken from Marcus' book *Number Fields* and see h
 Lean, using the library and then we will move to elliptic curves and modular forms.
 
 Most (but not all!) of the `sorry` are provable. It's a good idea to try to do so to familiarize
-yourself with the library (the penultimate is probably quite hard, but it's fun).
+yourself with the library (`Ex15` is probably quite hard, but it's fun, and see `Ex16`).
 
 -/
 
@@ -39,7 +41,7 @@ open Algebra Ideal Module Nat NumberField InfinitePlace Polynomial Real
 /-- Theorem 1, page 10
 Let `α` be an algebraic integer, and let `f` be a monic polynomial over `ℤ` of least degree having
 `α` as a root. Then `f` is irreducible over `ℚ`. -/
-example (a : ℂ) (ha : IsIntegral ℤ a) :
+theorem Ex1 (a : ℂ) (ha : IsIntegral ℤ a) :
     Irreducible (map (algebraMap ℤ ℚ) (minpoly ℤ a)) := by
   rw [← IsPrimitive.irreducible_iff_irreducible_map_fraction_map] --found searching "Gauss lemma"
   · exact minpoly.irreducible ha -- `exact?`
@@ -48,7 +50,7 @@ example (a : ℂ) (ha : IsIntegral ℤ a) :
 
 /-- ... Equivalently, the monic irreducible polynomial over `ℚ` having `α` as a root has
     coefficients in `ℤ`. -/
-example (K : Type) [Field K] [CharZero K] (a : K) (ha : IsIntegral ℤ a) :
+theorem Ex2 (K : Type) [Field K] [CharZero K] (a : K) (ha : IsIntegral ℤ a) :
     (minpoly ℚ a) ∈ lifts (algebraMap ℤ ℚ) := by
   rw [mem_lifts]
   use minpoly ℤ a
@@ -78,7 +80,7 @@ variable (K : Type*) [Field K] [NumberField K] -- note that `[Field K]` is neede
 
 #synth Module.Finite ℤ (𝓞 K)
 
-example : finrank ℤ (𝓞 K) = finrank ℚ K := by
+theorem Ex3 : finrank ℤ (𝓞 K) = finrank ℚ K := by
   exact RingOfIntegers.rank K -- `exact?`
 
 /- Theorem 14, page 40
@@ -98,7 +100,7 @@ variable (R : Type*) [CommRing R] [IsDedekindDomain R]
 /- Theorem 21, page 46
 ∑ eᵢ fᵢ = n -/
 
-example (K L : Type*) [Field K] [Field L] [NumberField K] [NumberField L] [Algebra K L]
+theorem Ex4 (K L : Type*) [Field K] [Field L] [NumberField K] [NumberField L] [Algebra K L]
     (p : Ideal (𝓞 K)) [p.IsMaximal] :
     ∑ P ∈ IsDedekindDomain.primesOverFinset p (𝓞 L), p.ramificationIdx P * p.inertiaDeg P =
     Module.finrank K L := by
@@ -113,7 +115,7 @@ example (K L : Type*) [Field K] [Field L] [NumberField K] [NumberField L] [Algeb
 Every nonzero ideal `I` in `𝓞 K` contains a nonzero element `α` with
 `|Norm(α)| ≤ n! / n ^ n * (4 / π)^r₂ √|disc(𝓞 K)| * Norm(I)`.
 -/
-example (I : Ideal (𝓞 K)) (hI : I ≠ ⊥) :
+theorem Ex5 (I : Ideal (𝓞 K)) (hI : I ≠ ⊥) :
     letI n := finrank ℚ K
     ∃ a, a ∈ I ∧ a ≠ 0 ∧ |norm ℚ (a : K)| ≤
     absNorm I * (4 / π) ^ nrComplexPlaces K * n ! / n ^ n * √|discr K| := by
@@ -126,13 +128,13 @@ example (I : Ideal (𝓞 K)) (hI : I ≠ ⊥) :
 
 #synth Module.Finite ℤ (Additive (𝓞 K)ˣ)
 
-example : finrank ℤ (Additive (𝓞 K)ˣ) = nrRealPlaces K + nrComplexPlaces K - 1 := by
+theorem Ex6 : finrank ℤ (Additive (𝓞 K)ˣ) = nrRealPlaces K + nrComplexPlaces K - 1 := by
   rw [← finrank_quotient_torsion_eq, ← card_eq_nrRealPlaces_add_nrComplexPlaces, ← Units.rank]
   exact Units.finrank_modTorsion K
 
 /- The class number formula -/
 open Filter Topology Units in
-example :
+theorem Ex7 :
     letI r₁ := nrRealPlaces K
     letI r₂ := nrComplexPlaces K
     Tendsto (fun s : ℝ ↦ (s - 1) * dedekindZeta K s) (𝓝[>] 1)
@@ -142,7 +144,7 @@ example :
 
 open Ideal in
 /-- A weak form of Chebotarev's density theorem. -/
-example (K : Type*) [Field K] [NumberField K] [IsGalois ℚ K] (C : ConjClasses Gal(K/ℚ)) :
+theorem Ex8 (K : Type*) [Field K] [NumberField K] [IsGalois ℚ K] (C : ConjClasses Gal(K/ℚ)) :
     {p : Primes | ∃ Q ∈ (span {(p : ℤ)}).primesOver (𝓞 K),
       ∃ σ, ConjClasses.mk σ = C ∧ IsArithFrobAt ℤ σ Q}.Infinite := by
   sorry
@@ -162,7 +164,7 @@ instance : Fact (∀ r : ℚ, r ^ 2 ≠ -1 + 0 * r) := ⟨by grind [sq_nonneg]�
 instance : NumberField (QuadraticAlgebra ℚ (-1) 0) where
 
 /-- The ring of integers of `ℚ(i)` is `ℤ[i]`. -/
-noncomputable example : 𝓞 (QuadraticAlgebra ℚ (-1) 0) ≃ₐ[ℤ] QuadraticAlgebra ℤ (-1) 0 := by
+noncomputable def Ex9 : 𝓞 (QuadraticAlgebra ℚ (-1) 0) ≃ₐ[ℤ] QuadraticAlgebra ℤ (-1) 0 := by
   haveI : Fact (Squarefree (-1 : ℤ)) := ⟨(isUnit_one.neg).squarefree⟩
   haveI : Fact ((-1 : ℤ) ≠ 1) := ⟨by decide⟩
   haveI : IsIntegralClosure (QuadraticAlgebra ℤ (-1) 0) ℤ (QuadraticAlgebra ℚ (-1) 0) :=
@@ -171,18 +173,17 @@ noncomputable example : 𝓞 (QuadraticAlgebra ℚ (-1) 0) ≃ₐ[ℤ] Quadratic
     (QuadraticAlgebra ℤ (-1) 0)
 
 /-- A more idiomatic way of saying the same is the following, but it needs
-`import Norwich.Instances`. An interesting exercise is to remove it and fill in the missing instance
-by hand: you will discover that the instance
+`Norwich.Preliminaries.Instances`. An interesting exercise is to remove it and fill in the missing instance by hand: you will discover that the instance
 `instance (a : ℤ) : Algebra (QuadraticAlgebra ℤ a 0) (QuadraticAlgebra S a 0) :=`
 is not enough here. Can you spot why?
 -/
-example : IsIntegralClosure (QuadraticAlgebra ℤ (-1) 0) ℤ ((QuadraticAlgebra ℚ (-1) 0)) := by
+theorem Ex10 : IsIntegralClosure (QuadraticAlgebra ℤ (-1) 0) ℤ ((QuadraticAlgebra ℚ (-1) 0)) := by
   haveI : Fact (Squarefree (-1 : ℤ)) := ⟨(isUnit_one.neg).squarefree⟩
   haveI : Fact ((-1 : ℤ) ≠ 1) := ⟨by decide⟩
   exact QuadraticInteger.d_2_or_3 (Or.inr (by decide))
 
 /-- The discriminant of `ℚ(i)` is `-4`. -/
-example : discr (QuadraticAlgebra ℚ (-1) 0) = -4 := by
+theorem Ex11 : discr (QuadraticAlgebra ℚ (-1) 0) = -4 := by
   haveI : Fact (Squarefree (-1 : ℤ)) := ⟨(isUnit_one.neg).squarefree⟩
   haveI : Fact ((-1 : ℤ) ≠ 1) := ⟨by decide⟩
   simpa using QuadraticInteger.discr_d_2_or_3 (d := -1) (Or.inr (by decide))
@@ -190,19 +191,19 @@ example : discr (QuadraticAlgebra ℚ (-1) 0) = -4 := by
 /- We now state the same two facts for the `n`-th cyclotomic field. -/
 
 /-- The ring of integers of `ℚ(ζₙ)` is `ℤ[ζₙ]`. -/
-example (n : ℕ) [NeZero n] (K : Type*) [Field K] [CharZero K] [IsCyclotomicExtension {n} ℚ K]
+theorem Ex12 (n : ℕ) [NeZero n] (K : Type*) [Field K] [CharZero K] [IsCyclotomicExtension {n} ℚ K]
     {ζ : K} (hζ : IsPrimitiveRoot ζ n) :
     IsIntegralClosure (ℤ[ζ]) ℤ K := by
   exact IsCyclotomicExtension.Rat.isIntegralClosure_adjoin_singleton hζ
 
 /-- The discriminant of `ℚ(ζₙ)`. -/
-example (n : ℕ) [NeZero n] (K : Type*) [Field K] [NumberField K] [IsCyclotomicExtension {n} ℚ K] :
+theorem Ex13 (n : ℕ) [NeZero n] (K : Type*) [Field K] [NumberField K] [IsCyclotomicExtension {n} ℚ K] :
     discr K = (-1) ^ (φ n / 2) * (n ^ φ n / ∏ p ∈ n.primeFactors, p ^ (φ n / (p - 1))) := by
   exact IsCyclotomicExtension.Rat.discr n K
 
 /-- The Kronecker–Weber theorem: every finite abelian extension of `ℚ` is contained in a
 cyclotomic field, i.e. it embeds into `ℚ(ζₙ)` for some `n`. (This is not yet in mathlib.) -/
-example (K : Type*) [Field K] [NumberField K] [IsAbelianGalois ℚ K] :
+theorem Ex14 (K : Type*) [Field K] [NumberField K] [IsAbelianGalois ℚ K] :
     ∃ n : ℕ, Nonempty (K →ₐ[ℚ] CyclotomicField n ℚ) := by
   sorry
 
@@ -214,7 +215,7 @@ example (K : Type*) [Field K] [NumberField K] [IsAbelianGalois ℚ K] :
 /-- For a prime `p` of good reduction, the `p`-th coefficient of the L-function of an elliptic
 curve `E / ℚ` is `aₚ = p + 1 - #E(𝔽_p)`, where `E(𝔽_p)` is the group of points of the reduction
 of `E` modulo `p` (here the reduction is taken over the residue field of `ℤ_[p]`). -/
-example (E : WeierstrassCurve ℚ) (p : ℕ) [Fact p.Prime]
+theorem Ex15 (E : WeierstrassCurve ℚ) (p : ℕ) [Fact p.Prime]
     (hp : ((E.baseChange ℚ_[p]).minimal ℤ_[p]).HasGoodReduction ℤ_[p]) :
     E.LFunction p = p + 1 -
       Nat.card (((E.baseChange ℚ_[p]).minimal ℤ_[p]).reduction ℤ_[p]).toAffine.Point := by
@@ -222,7 +223,7 @@ example (E : WeierstrassCurve ℚ) (p : ℕ) [Fact p.Prime]
 
 open IsDedekindDomain IsLocalRing in
 /-- Here is another version. -/
-example (E : WeierstrassCurve ℚ) (p : HeightOneSpectrum (𝓞 ℚ))
+theorem Ex16 (E : WeierstrassCurve ℚ) (p : HeightOneSpectrum (𝓞 ℚ))
     (hp : ((E.baseChange (p.adicCompletion ℚ)).minimal
       (p.adicCompletionIntegers ℚ)).HasGoodReduction (p.adicCompletionIntegers ℚ)) :
     letI R := p.adicCompletionIntegers ℚ
@@ -244,6 +245,6 @@ instance : WeierstrassCurve.IsElliptic E := by
 open CongruenceSubgroup UpperHalfPlane in
 /-- There is a unique normalized weight `2` cusp form of level `Γ₀(11)` whose coefficients agree
 with the curve's L-function at every prime. -/
-example : ∃! f : CuspForm (Gamma0 11) 2, (qExpansion 1 f).coeff 1 = 1 ∧
+theorem Ex17 : ∃! f : CuspForm (Gamma0 11) 2, (qExpansion 1 f).coeff 1 = 1 ∧
     ∀ (p : Primes), (qExpansion 1 f).coeff p = E.LFunction p := by
   sorry

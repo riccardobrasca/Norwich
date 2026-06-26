@@ -233,40 +233,4 @@ theorem lFunction_apply_eq_localEulerFactor (E : WeierstrassCurve ℚ)
   exact ArithmeticFunction.eulerProduct_ofPowerSeries_apply_prime _ _ hf p
     (prime_card_residueField p) hvanish
 
-example (E : WeierstrassCurve ℚ) (p : HeightOneSpectrum (𝓞 ℚ))
-    (hp : ((E.baseChange (p.adicCompletion ℚ)).minimal
-      (p.adicCompletionIntegers ℚ)).HasGoodReduction (p.adicCompletionIntegers ℚ)) :
-    letI R := p.adicCompletionIntegers ℚ
-    E.LFunction (Nat.card (ResidueField R)) = Nat.card (ResidueField R) + 1 -
-      Nat.card (((E.baseChange (p.adicCompletion ℚ)).minimal R).reduction R).toAffine.Point :=
-  lFunction_eq_of_hasGoodReduction E p (one_lt_card_residueField p)
-    (lFunction_apply_eq_localEulerFactor E p) hp
-
-open Rat.HeightOneSpectrum in
-example (E : WeierstrassCurve ℚ) (p : ℕ) [Fact p.Prime]
-    (hp : ((E.baseChange ℚ_[p]).minimal ℤ_[p]).HasGoodReduction ℤ_[p]) :
-    E.LFunction p = p + 1 -
-      Nat.card (((E.baseChange ℚ_[p]).minimal ℤ_[p]).reduction ℤ_[p]).toAffine.Point := by
-  -- Work at the height-one prime `v` of `𝓞 ℚ` corresponding to `p`; then `‖v‖ = p`.
-  set v : HeightOneSpectrum (𝓞 ℚ) := primesEquiv.symm ⟨p, Fact.out⟩ with hv
-  have hcard : Nat.card (ResidueField (v.adicCompletionIntegers ℚ)) = p := by
-    rw [card_residueField_eq, hv, Equiv.apply_symm_apply]
-  -- The two facts still needed are the *functoriality* of the reduction theory across the
-  -- continuous ℚ-algebra isomorphism `v.adicCompletion ℚ ≃ ℚ_[p]` (and `v.adicCompletionIntegers ℚ
-  -- ≃ ℤ_[p]`): that good reduction transfers, and that the two reductions have the same number of
-  -- points. Mathlib has the isomorphism (`Padic.adicCompletionEquiv`) but not this functoriality of
-  -- `minimal` / `reduction` / `HasGoodReduction`.
-  have hgood' : ((E.baseChange (v.adicCompletion ℚ)).minimal
-      (v.adicCompletionIntegers ℚ)).HasGoodReduction (v.adicCompletionIntegers ℚ) := by
-    sorry
-  have hpoint : Nat.card (((E.baseChange ℚ_[p]).minimal ℤ_[p]).reduction ℤ_[p]).toAffine.Point
-      = Nat.card (((E.baseChange (v.adicCompletion ℚ)).minimal
-          (v.adicCompletionIntegers ℚ)).reduction (v.adicCompletionIntegers ℚ)).toAffine.Point := by
-    sorry
-  have main := lFunction_eq_of_hasGoodReduction E v (one_lt_card_residueField v)
-    (lFunction_apply_eq_localEulerFactor E v) hgood'
-  rw [hcard] at main
-  rw [hpoint]
-  exact main
-
 end WeierstrassCurve

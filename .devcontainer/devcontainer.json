@@ -11,7 +11,7 @@
     "memory": "16gb"
   },
 
-  "onCreateCommand": "echo \"Downloading the Lean 4 mathematical library...\" && lake exe cache get && lake build +Norwich.Test && echo \"Finished setup! Open a file using the Explorer in the top-left of your screen.\"",
+  "onCreateCommand": "echo \"Downloading the Lean 4 mathematical library...\" && lake exe cache get! && lake build && echo \"Finished setup! Open a file using the Explorer in the top-left of your screen.\"",
 
   "customizations": {
     "codespaces": {
@@ -20,7 +20,8 @@
     "vscode" : {
       "extensions" : [ "leanprover.lean4" ],
       "settings": {
-        "workbench.secondarySideBar.defaultVisibility": "hidden"
+        "workbench.secondarySideBar.defaultVisibility": "hidden",
+        "terminal.integrated.hideOnStartup": "always"
       }
     }
   }
