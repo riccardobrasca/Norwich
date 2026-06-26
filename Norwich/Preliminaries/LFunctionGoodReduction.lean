@@ -1,4 +1,18 @@
-import Mathlib
+/-
+Copyright (c) 2026 Riccardo Brasca. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Riccardo Brasca
+-/
+
+module
+
+public import Mathlib.AlgebraicGeometry.EllipticCurve.LFunction
+public import Mathlib.NumberTheory.Padics.HeightOneSpectrum
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Int.Star
+import Mathlib.NumberTheory.Padics.RingHoms
+
+@[expose] public section
 
 /-!
 # `L`-function of an elliptic curve at a prime of good reduction (completion variant)

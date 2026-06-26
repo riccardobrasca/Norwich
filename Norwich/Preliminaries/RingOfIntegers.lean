@@ -1,12 +1,18 @@
-import Norwich.Preliminaries.Instances
-import Mathlib.Algebra.Squarefree.Basic
-import Mathlib.Data.Int.ModEq
-import Mathlib.NumberTheory.NumberField.Basic
-import Mathlib.Tactic.ModCases
-import Mathlib.RingTheory.Norm.Transitivity
-import Mathlib.Data.Nat.Prime.Int
-import Mathlib.NumberTheory.NumberField.Discriminant.Defs
+
+/-
+Copyright (c) 2026 Riccardo Brasca. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Riccardo Brasca
+-/
+
+module
+
+public import Norwich.Preliminaries.Instances
+public import Mathlib.NumberTheory.NumberField.Discriminant.Defs
 import Mathlib.Tactic.Qify
+
+
+@[expose] public section
 
 namespace QuadraticInteger
 

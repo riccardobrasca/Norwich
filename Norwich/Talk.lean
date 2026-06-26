@@ -1,9 +1,20 @@
 /-
-If your computer is fast enough, always start with `import Mathlib`. You can clean up later.
+Copyright (c) 2026 Riccardo Brasca. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Riccardo Brasca
 -/
 
-import Mathlib
-import Norwich.Preliminaries.Instances
+module
+
+import Mathlib.NumberTheory.NumberField.Cyclotomic.Basic
+import Mathlib.RingTheory.RamificationInertia.Basic
+import Mathlib.NumberTheory.NumberField.DedekindZeta
+import Mathlib.RingTheory.Frobenius
+import Mathlib.NumberTheory.ModularForms.QExpansion
+import Norwich.Preliminaries.LFunctionGoodReduction
+import Norwich.Preliminaries.RingOfIntegers
+
+-- If your computer is fast enough it may be a good idea to start with `import Mathlib`
 
 /-!
 
@@ -220,3 +231,5 @@ with the curve's L-function at every prime. -/
 example : ∃! f : CuspForm (Gamma0 11) 2, (qExpansion 1 f).coeff 1 = 1 ∧
     ∀ (p : Primes), (qExpansion 1 f).coeff p = E.LFunction p := by
   sorry
+
+#min_imports
