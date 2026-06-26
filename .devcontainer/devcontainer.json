@@ -20,6 +20,7 @@
     "vscode" : {
       "extensions" : [ "leanprover.lean4" ],
       "settings": {
+        "chat.disableAIFeatures": true,
         "workbench.secondarySideBar.defaultVisibility": "hidden",
         "terminal.integrated.hideOnStartup": "always"
       }
