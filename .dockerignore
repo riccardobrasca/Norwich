@@ -1,0 +1,5 @@
+# The .devcontainer/Dockerfile build context is the repo root (so it can read
+# `lean-toolchain`). Everything else — `.lake` alone is several GB — would be
+# pointlessly shipped to the Docker daemon, so ignore all but the toolchain pin.
+*
+!lean-toolchain
