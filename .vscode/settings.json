@@ -41,6 +41,8 @@
         "*": false
     },
     "github.copilot.completions.chat.enabled": false,
+    "workbench.disableAICustomizations": true,
+    "chat.agentsControl.enabled": "hidden",
     "workbench.secondarySideBar.defaultVisibility": "hidden",
     "terminal.integrated.hideOnStartup": "always"
 }
