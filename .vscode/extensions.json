@@ -8,7 +8,8 @@
 	],
 	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
 	"unwantedRecommendations": [
-		"ms-vscode-remote.remote-containers"
+		"ms-vscode-remote.remote-containers",
+		"GitHub.copilot",
+		"GitHub.copilot-chat"
 	]
 }
-

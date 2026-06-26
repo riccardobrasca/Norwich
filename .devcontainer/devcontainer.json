@@ -21,6 +21,10 @@
       "extensions" : [ "leanprover.lean4" ],
       "settings": {
         "chat.disableAIFeatures": true,
+        "github.copilot.enable": {
+          "*": false
+        },
+        "github.copilot.completions.chat.enabled": false,
         "workbench.secondarySideBar.defaultVisibility": "hidden",
         "terminal.integrated.hideOnStartup": "always"
       }
