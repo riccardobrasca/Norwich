@@ -16,3 +16,7 @@ rev = "v4.31.0"
 
 [[lean_lib]]
 name = "Norwich"
+# Build every module as its own root so CI compiles all files (e.g.
+# `Talk_no_sorry`, which can't be imported alongside `Talk` — they share
+# declaration names like `E`).
+globs = ["Norwich", "Norwich.+"]
