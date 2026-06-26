@@ -12,7 +12,7 @@
         "lakefile.toml": true,
         "lean-toolchain": true,
         "LICENSE": true,
-        ".gitpod.yml": true,
+        ".devcontainer": true,
         ".github": true,
         ".lake": true,
         "img": true,
