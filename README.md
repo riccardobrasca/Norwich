@@ -104,7 +104,7 @@ You can temporarily play with Lean using Github Codespaces. This requires a Gith
 <a href='https://codespaces.new/riccardobrasca/Norwich' target="_blank" rel="noreferrer noopener"><img src='https://github.com/codespaces/badge.svg' alt='Open in GitHub Codespaces' style='max-width: 100%;'></a>
 
 * Make sure the Machine type is `4-core`, and then press `Create codespace`
-* After 1-2 minutes you see a VSCode window in your browser. However, it is still busily downloading mathlib in the background, so give it another few minutes (5 to be safe) and then open a `.lean` file to start.
+* After a couple of minuts minutes you see a VSCode window in your browser. However, it is still busily downloading mathlib in the background, so give it another few minutes (5-10 to be safe) and then open a `.lean` file to start.
 
 To restart a previous codespace, go to [https://github.com/codespaces/](https://github.com/codespaces/).
 
