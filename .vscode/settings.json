@@ -8,6 +8,7 @@
         "html": true,
         "lake-packages": true,
         ".gitignore": true,
+        ".dockerignore": true,
         "lake-manifest.json": true,
         "lakefile.toml": true,
         "lean-toolchain": true,

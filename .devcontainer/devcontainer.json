@@ -14,8 +14,14 @@
   "onCreateCommand": "echo \"Downloading the Lean 4 mathematical library...\" && lake exe cache get && lake build +Norwich.Test && echo \"Finished setup! Open a file using the Explorer in the top-left of your screen.\"",
 
   "customizations": {
+    "codespaces": {
+      "openFiles": [ "Norwich/Talk.lean" ]
+    },
     "vscode" : {
-      "extensions" : [ "leanprover.lean4" ]
+      "extensions" : [ "leanprover.lean4" ],
+      "settings": {
+        "workbench.secondarySideBar.defaultVisibility": "hidden"
+      }
     }
   }
 }
