@@ -110,6 +110,5 @@ To restart a previous workspace, go to [https://gitpod.io/workspaces/](https://g
 ## Troubleshooting
 
 If you get the error `unknown package 'Mathlib'` and a red squiggle under `import Mathlib.Tactic` then you probably didn't open the right folder (what you see might be slightly different from the screenshot below depending on the extensions you have installed, but the red squiggle shouldn't be there).
-![6](img/6.png)
 * Make sure to select `File/Open Folder` (*not* `File/Open File`) and to select the root folder called `Norwich` (or the name you chose during the installation). Note that this folder contains another folder also called `Norwich`: you have to select the first one (*not* the one `Norwich/Norwich`).
 * If the error persists you can use Gitpod as described above and ask for help.
