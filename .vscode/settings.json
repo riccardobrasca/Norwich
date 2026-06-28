@@ -36,7 +36,7 @@
     "lean4.infoview.emphasizeFirstGoal": true,
     "editor.rulers" : [100],
     "lean4.infoview.showExpectedType": false,
-    "chat.disableAIFeatures": true,
+    "chat.disableAIFeatures": false,
     "github.copilot.enable": {
         "*": false
     },
