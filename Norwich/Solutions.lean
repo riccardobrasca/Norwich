@@ -30,7 +30,7 @@ surprised by the mathlib approach from time to time.
 We go through various examples taken from Marcus' book *Number Fields* and see how to state them in
 Lean, using the library and then we will move to elliptic curves and modular forms.
 
-Most (but not all!) of the `sorry` are provable. It's a good idea to try to do so to familiarize
+Most (but not all!) of the `sorry` are easy to prove. It's a good idea to try to do so to familiarize
 yourself with the library (`Ex15` is probably quite hard, but it's fun, and see `Ex16`).
 
 -/
