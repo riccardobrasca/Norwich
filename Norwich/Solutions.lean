@@ -28,7 +28,8 @@ It's also a very interesting experience: even if you are a number theorist, you 
 surprised by the mathlib approach from time to time.
 
 We go through various examples taken from Marcus' book *Number Fields* and see how to state them in
-Lean, using the library and then we will move to elliptic curves and modular forms.
+Lean, using the library. We then move on to some explicit examples of number fields and we will finish
+with elliptic curves and modular forms.
 
 Most (but not all!) of the `sorry` are easy to prove. It's a good idea to try to do so to familiarize
 yourself with the library (`Ex15` is probably quite hard, but it's fun, and see `Ex16`).
@@ -69,7 +70,7 @@ theorem Ex2 (K : Type) [Field K] [CharZero K] (a : K) (ha : IsIntegral ℤ a) :
 #synth IsIntegrallyClosed ℤ
 
 /- Corollary, page 22
-Let `K` be a number field of degree `n` over ℚ, and let `R` be the ring of integers of `K`.
+Let `K` be a number field of degree `n` over `ℚ`, and let `R` be the ring of integers of `K`.
 Then `R` is a free abelian group of rank `n`. -/
 
 variable (K : Type*) [Field K] [NumberField K] -- note that `[Field K]` is needed
@@ -103,7 +104,7 @@ variable (R : Type*) [CommRing R] [IsDedekindDomain R]
 theorem Ex4 (K L : Type*) [Field K] [Field L] [NumberField K] [NumberField L] [Algebra K L]
     (p : Ideal (𝓞 K)) [p.IsMaximal] :
     ∑ P ∈ IsDedekindDomain.primesOverFinset p (𝓞 L), p.ramificationIdx P * p.inertiaDeg P =
-    Module.finrank K L := by
+    finrank K L := by
   apply sum_ramification_inertia
   exact IsMaximal.ne_bot_of_isIntegral_int p
 
@@ -117,8 +118,9 @@ Every nonzero ideal `I` in `𝓞 K` contains a nonzero element `α` with
 -/
 theorem Ex5 (I : Ideal (𝓞 K)) (hI : I ≠ ⊥) :
     letI n := finrank ℚ K
+    letI r₂ := nrComplexPlaces K
     ∃ a, a ∈ I ∧ a ≠ 0 ∧ |norm ℚ (a : K)| ≤
-    absNorm I * (4 / π) ^ nrComplexPlaces K * n ! / n ^ n * √|discr K| := by
+    absNorm I * (4 / π) ^ r₂ * n ! / n ^ n * √|discr K| := by
   obtain ⟨b, ⟨a, hamem, rfl⟩, hb0, hble⟩ := exists_ne_zero_mem_ideal_of_norm_le_mul_sqrt_discr K
     (FractionalIdeal.mk0 K ⟨I, mem_nonZeroDivisors_of_ne_zero hI⟩)
   exact ⟨a, hamem, by simpa using hb0, by simpa [FractionalIdeal.coeIdeal_absNorm] using hble⟩
@@ -147,6 +149,8 @@ open Ideal in
 theorem Ex8 (K : Type*) [Field K] [NumberField K] [IsGalois ℚ K] (C : ConjClasses Gal(K/ℚ)) :
     {p : Primes | ∃ Q ∈ (span {(p : ℤ)}).primesOver (𝓞 K),
       ∃ σ, ConjClasses.mk σ = C ∧ IsArithFrobAt ℤ σ Q}.Infinite := by
+  -- This is not in mathlib yet, so it is much harder than the previous ones.
+  -- We (Chris, Riccardo and Xavier) have a full proof in a private repo, feel free to ask!
   sorry
 
 /-!
@@ -205,6 +209,9 @@ theorem Ex13 (n : ℕ) [NeZero n] (K : Type*) [Field K] [NumberField K] [IsCyclo
 cyclotomic field, i.e. it embeds into `ℚ(ζₙ)` for some `n`. (This is not yet in mathlib.) -/
 theorem Ex14 (K : Type*) [Field K] [NumberField K] [IsAbelianGalois ℚ K] :
     ∃ n : ℕ, Nonempty (K →ₐ[ℚ] CyclotomicField n ℚ) := by
+  -- I (Riccardo) am not aware of a full formalization of this one, but I think various people
+  -- are working on it and we may be not far (even very close/already done if we take into account
+  -- various autoformalization projects)
   sorry
 
 
@@ -219,6 +226,9 @@ theorem Ex15 (E : WeierstrassCurve ℚ) (p : ℕ) [Fact p.Prime]
     (hp : ((E.baseChange ℚ_[p]).minimal ℤ_[p]).HasGoodReduction ℤ_[p]) :
     E.LFunction p = p + 1 -
       Nat.card (((E.baseChange ℚ_[p]).minimal ℤ_[p]).reduction ℤ_[p]).toAffine.Point := by
+  -- This is not easy because mathlib is missing some API
+  -- If you are interested you should first of all add the missing lemmas, for example that
+  -- `HasGoodReduction` is preserved under ring isomorphisms.
   sorry
 
 open IsDedekindDomain IsLocalRing in
@@ -247,4 +257,5 @@ open CongruenceSubgroup UpperHalfPlane in
 with the curve's L-function at every prime. -/
 theorem Ex17 : ∃! f : CuspForm (Gamma0 11) 2, (qExpansion 1 f).coeff 1 = 1 ∧
     ∀ (p : Primes), (qExpansion 1 f).coeff p = E.LFunction p := by
+  -- This is Kevin's job.
   sorry

@@ -28,10 +28,12 @@ It's also a very interesting experience: even if you are a number theorist, you 
 surprised by the mathlib approach from time to time.
 
 We go through various examples taken from Marcus' book *Number Fields* and see how to state them in
-Lean, using the library and then we will move to elliptic curves and modular forms.
+Lean, using the library. We then move on to some explicit examples of number fields and we will finish
+with elliptic curves and modular forms.
 
-Most (but not all!) of the `sorry` are easy to prove. It's a good idea to try to do so to familiarize
-yourself with the library (`Ex15` is probably quite hard, but it's fun, and see `Ex16`).
+Most (but not all!) of the `sorry` are easy to prove (the main point is what is already in mathlib
+and what it is not yet there). It's a good idea to try to do so to familiarize
+yourself with the library (the hard ones are `Ex8`, `Ex14`, `Ex15` and `Ex17`).
 
 -/
 
@@ -63,7 +65,7 @@ theorem Ex2 (K : Type) [Field K] [CharZero K] (a : K) (ha : IsIntegral ℤ a) :
 #synth IsIntegrallyClosed ℤ
 
 /- Corollary, page 22
-Let `K` be a number field of degree `n` over ℚ, and let `R` be the ring of integers of `K`.
+Let `K` be a number field of degree `n` over `ℚ`, and let `R` be the ring of integers of `K`.
 Then `R` is a free abelian group of rank `n`. -/
 
 variable (K : Type*) [Field K] [NumberField K] -- note that `[Field K]` is needed
@@ -97,7 +99,7 @@ variable (R : Type*) [CommRing R] [IsDedekindDomain R]
 theorem Ex4 (K L : Type*) [Field K] [Field L] [NumberField K] [NumberField L] [Algebra K L]
     (p : Ideal (𝓞 K)) [p.IsMaximal] :
     ∑ P ∈ IsDedekindDomain.primesOverFinset p (𝓞 L), p.ramificationIdx P * p.inertiaDeg P =
-    Module.finrank K L := by
+    finrank K L := by
   sorry
 
 /- We even have a generalization to any finite flat extension! -/
@@ -110,8 +112,9 @@ Every nonzero ideal `I` in `𝓞 K` contains a nonzero element `α` with
 -/
 theorem Ex5 (I : Ideal (𝓞 K)) (hI : I ≠ ⊥) :
     letI n := finrank ℚ K
+    letI r₂ := nrComplexPlaces K
     ∃ a, a ∈ I ∧ a ≠ 0 ∧ |norm ℚ (a : K)| ≤
-    absNorm I * (4 / π) ^ nrComplexPlaces K * n ! / n ^ n * √|discr K| := by
+    absNorm I * (4 / π) ^ r₂ * n ! / n ^ n * √|discr K| := by
   sorry
 
 /- Theorem 38, page 100, Dirichlet's units theorem
