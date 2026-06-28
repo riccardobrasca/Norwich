@@ -23,14 +23,14 @@ Note: to get this repository, you will need to download Lean's mathematical libr
 * Open Visual Studio Code.
 
 * In the top-right (or top-middle) of the screen there is a Lean menu marked by `∀`.
-  In it, choose `Open Project... > Project: Download Project`. If you don't see the `∀`, the Lean extension is not installed, go back to the previous step or ask for help.
+  In it, choose `Open Project... > Project: Download Project`. If you don't see the `∀`, the Lean extension is not installed; go back to the previous step or ask for help.
 
   ![1](img/1.png)
 * Type
   ```
   https://github.com/riccardobrasca/Norwich.git
   ```
-  and press enter (note that VS Code suggests you to download mathlib, that is *not* this repository).
+  and press enter (note that VS Code suggests downloading mathlib, which is *not* this repository).
 
   ![2](img/2.png)
 * Choose a name for the folder where you want to have this repository (for example `Norwich`).

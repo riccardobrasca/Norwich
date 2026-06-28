@@ -14,7 +14,11 @@ import Mathlib.NumberTheory.ModularForms.QExpansion
 import Norwich.Preliminaries.LFunctionGoodReduction
 import Norwich.Preliminaries.RingOfIntegers
 
--- If your computer is fast enough it may be a good idea to start with `import Mathlib`
+/- If your computer is fast enough it may be a good idea to start with
+import Mathlib
+import Norwich.Preliminaries.LFunctionGoodReduction
+import Norwich.Preliminaries.RingOfIntegers
+-/
 
 /-!
 
@@ -32,8 +36,8 @@ Lean, using the library. We then move on to some explicit examples of number fie
 with elliptic curves and modular forms.
 
 Most (but not all!) of the `sorry` are easy to prove (the main point is what is already in mathlib
-and what it is not yet there). It's a good idea to try to do so to familiarize
-yourself with the library (the hard ones are `Ex8`, `Ex14`, `Ex15` and `Ex17`).
+and what is not yet there). It's a good idea to try to do so to familiarize yourself with the library.
+The hard ones are `Ex8`, `Ex14`, `Ex15` and `Ex17`. The others are proved in the `Solutions.lean` file.
 
 -/
 
@@ -153,18 +157,21 @@ To see `QuadraticAlgebra ℚ (-1) 0` as a field, mathlib needs to know that `X ^
 rational root, which is encoded as the following `Fact`. -/
 instance : Fact (∀ r : ℚ, r ^ 2 ≠ -1 + 0 * r) := ⟨by grind [sq_nonneg]⟩
 
+/-- The following is missing from the mathlib API. Can you write the general version that should be
+added? -/
 instance : NumberField (QuadraticAlgebra ℚ (-1) 0) where
 
 /-- The ring of integers of `ℚ(i)` is `ℤ[i]`. -/
 noncomputable def Ex9 : 𝓞 (QuadraticAlgebra ℚ (-1) 0) ≃ₐ[ℤ] QuadraticAlgebra ℤ (-1) 0 := by
+  -- For this and the following ones you should have a look at what is proved in the file
+  -- `Norwich.Preliminaries.RingOfIntegers`
   sorry
 
-/-- A more idiomatic way of saying the same is the following, but it needs
-`import Norwich.Preliminaries.Instances`. An interesting exercise is to remove it and fill in the missing instance
-by hand: you will discover that the instance
-`instance (a : ℤ) : Algebra (QuadraticAlgebra ℤ a 0) (QuadraticAlgebra S a 0) :=`
-is not enough here. Can you spot why?
--/
+/-- A more idiomatic way of saying the same thing is the following, but it needs
+`import Norwich.Preliminaries.Instances`. An interesting exercise is to remove it and fill in the
+missing instance by hand: you will discover that the instance
+`instance (a : ℤ) : Algebra (QuadraticAlgebra ℤ a 0) (QuadraticAlgebra S a 0) :=` is not enough here.
+Can you spot why? -/
 theorem Ex10 : IsIntegralClosure (QuadraticAlgebra ℤ (-1) 0) ℤ ((QuadraticAlgebra ℚ (-1) 0)) := by
   sorry
 
@@ -176,8 +183,7 @@ theorem Ex11 : discr (QuadraticAlgebra ℚ (-1) 0) = -4 := by
 
 /-- The ring of integers of `ℚ(ζₙ)` is `ℤ[ζₙ]`. -/
 theorem Ex12 (n : ℕ) [NeZero n] (K : Type*) [Field K] [CharZero K] [IsCyclotomicExtension {n} ℚ K]
-    {ζ : K} (hζ : IsPrimitiveRoot ζ n) :
-    IsIntegralClosure (ℤ[ζ]) ℤ K := by
+    {ζ : K} (hζ : IsPrimitiveRoot ζ n) : IsIntegralClosure (ℤ[ζ]) ℤ K := by
   sorry
 
 /-- The discriminant of `ℚ(ζₙ)`. -/
@@ -190,7 +196,6 @@ cyclotomic field, i.e. it embeds into `ℚ(ζₙ)` for some `n`. (This is not ye
 theorem Ex14 (K : Type*) [Field K] [NumberField K] [IsAbelianGalois ℚ K] :
     ∃ n : ℕ, Nonempty (K →ₐ[ℚ] CyclotomicField n ℚ) := by
   sorry
-
 
 /-!
 ## Elliptic curves and modular forms
